@@ -19,11 +19,35 @@ sudo docker-compose up -d
 
 This command runs app container (name = loterio_ma_rng), by default it is available under port 9901 (mapping from port 8080).
 
-## Tests
+## Deployment
+
+### Application instances
+
+We can two application instances:
+1. **DEV** - develop instance, this is  continuous integration branch. After merge to `develop` this instance build automatically.
+2. **PROD** - production instance, related to master branch.
+
+Application is available on address:
+193.70.113.241:9901
+
+### Code standards
+
+I think it's worth getting into the docker's container https://github.com/jakzal/phpqa.
+
+### Description
+**PHP Code_Sniffer** – checks code style, has got popular conventions build-in (e.g. PSR-2, Symfony2).  
+**PHP Mess Detector** – looks for potential problems, such as possible bugs, dead code, suboptimal code, overcomplicated expressions, etc.  
+**PHP Depend** – can generate set of software metrics for code structure (see further).  
+**PHP Copy/Paste Detector** – scans project for duplicated code.  
+**PHPLOC** – measures the size of PHP project.  
+**PHPUnit** – runs unit tests and is used as a runner for other test tools.  
+All scripts are located in the .dev directory. Also in it (in the report catalog) you will find the results of the script.
+
+### Tests
 
 We try to use TDD in the system and write our tests mainly based on PHPUnit.
 
-### Basic info about testing
+#### Basic info about testing
 
 In the whole project it is recommended to use the TDD approach, which assumes creating tests before the main logic. The following testing methods are recommended:
 1. Unit tests in the case of business logic, this applies to services or other classes that perform operations on objects.
@@ -35,7 +59,7 @@ Comments:
 - test cases stored in separate files.
 - each test should have between 4 and 10 test cases.
 
-### How to run tests
+#### How to run tests
 Tests are run using PHPUnit, this happens immediately after firing the application container. However, to run the tests manually:
 
 Interactive open docker container:
@@ -51,35 +75,15 @@ php bin/phpunit
 
 Test results will be returned to the console, beware - in the absence of additional parameters, all tests will be run (this operation may take some time - it is worth considering firing specific TestSuite).
 
-## Code standards
+### Versioning
 
-I think it's worth getting into the docker's container https://github.com/jakzal/phpqa.
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/RaspberryVision/loterioma-rng/tags). 
 
-### Description
-**PHP Code_Sniffer** – checks code style, has got popular conventions build-in (e.g. PSR-2, Symfony2).  
-**PHP Mess Detector** – looks for potential problems, such as possible bugs, dead code, suboptimal code, overcomplicated expressions, etc.  
-**PHP Depend** – can generate set of software metrics for code structure (see further).  
-**PHP Copy/Paste Detector** – scans project for duplicated code.  
-**PHPLOC** – measures the size of PHP project.  
-**PHPUnit** – runs unit tests and is used as a runner for other test tools.  
-All scripts are located in the .dev directory. Also in it (in the report catalog) you will find the results of the script.
+### Tags
 
-## Deployment
-
-We can two application instances:
-1. **DEV** - develop instance, this is  continuous integration branch. After merge to `develop` this instance build automatically.
-2. **PROD** - production instance, related to master branch.
-
-Application is available on address:
-193.70.113.241:9901
-
-## Contributing
-
--
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We can (but not must) predefined tags for specific versions:
+**-dev** - suggest that is only develop version.
+**-stable** - suggest that version is recognized as stable.
 
 ## Authors
 
