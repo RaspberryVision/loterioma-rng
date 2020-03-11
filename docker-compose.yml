@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  php:
+    build:
+      context: .docker/php
+      args:
+        TIMEZONE: ${TIMEZONE}
+    volumes:
+      - .:/var/www/app
+      - ./.docker/php/log.conf:/usr/local/etc/php-fpm.z/zz-log.conf
+      - ./.docker/php/php.conf:/usr/local/etc/php/conf.d/zz-conf.ini
+    ports:
+      - 8086:8000
