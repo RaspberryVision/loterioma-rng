@@ -1,36 +1,16 @@
-FROM php:7.3-apache
+FROM php:7.3.13-apache
 
-ARG TIMEZONE=${TIMEZONE:-America/Chicago}
-ARG DEV_ENV=${DEV_ENV:-dev}
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends vim curl debconf subversion git apt-transport-https apt-utils \
+    build-essential locales acl mailutils wget nodejs zip unzip \
+    gnupg gnupg1 gnupg2 libxslt-dev
 
-RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-RUN docker-php-ext-install iconv
-RUN docker-php-ext-install pdo_mysql
-RUN docker-php-ext-install bcmath
-RUN docker-php-ext-install sockets
-RUN docker-php-ext-enable iconv
-RUN docker-php-ext-enable pdo_mysql
-RUN docker-php-ext-enable bcmath
-RUN docker-php-ext-enable sockets
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-# Install Git #
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y git
-
-# Install Composer
-ENV COMPOSER_ALLOW_SUPERUSER 1
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-&& composer --version
-
-RUN apt-get install -y libcurl4-openssl-dev pkg-config libssl-dev
-
-# Set timezone
-RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} > /etc/timezone \
-&& printf '[PHP]\ndate.timezone = "%s"\n', ${TIMEZONE} > /usr/local/etc/php/conf.d/tzone.ini \
-&& "date"
-
-WORKDIR /var/www/app
+### INSTALL COMPOSER ###
+RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
+	mv composer.phar /usr/local/bin/composer
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT /entrypoint.sh

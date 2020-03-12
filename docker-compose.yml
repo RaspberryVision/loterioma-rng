@@ -1,14 +1,11 @@
-version: '3.4'
-
+version: '3'
 services:
-  php:
-    build:
-      context: .docker/php
-      args:
-        TIMEZONE: ${TIMEZONE}
-    volumes:
-      - .:/var/www/app
-      - ./.docker/php/log.conf:/usr/local/etc/php-fpm.z/zz-log.conf
-      - ./.docker/php/php.conf:/usr/local/etc/php/conf.d/zz-conf.ini
-    ports:
-      - 8086:8000
+    php:
+        build: .docker/php
+        container_name: loterioma_rng
+        ports:
+          - 9901:80
+        environment:
+          - APACHE_DOCUMENT_ROOT=/var/www/html/public
+        volumes:
+          - .:/var/www/html
