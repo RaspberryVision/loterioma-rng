@@ -7,3 +7,7 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+###> qa tools ###
+.docker/qa-results
+###< qa tools ###

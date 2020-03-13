@@ -1,11 +1,26 @@
 version: '3'
 services:
-    php:
+    loterioma_rng:
         build: .docker/php
         container_name: loterioma_rng
+        stdin_open: true
+        tty: true
         ports:
           - 9901:80
         environment:
           - APACHE_DOCUMENT_ROOT=/var/www/html/public
         volumes:
           - .:/var/www/html
+
+    loterioma_rng_qa:
+        image: raspberryvision/phpqa:0.1.0-stretch
+        container_name: loterioma_rng_qa
+        stdin_open: true
+        tty: true
+        environment:
+            - PHPQA_HOME_DIR=/phpqa
+            - PHPQA_CODE_DIR=${PHPQA_HOME_DIR}/code
+            - PHPQA_LOGS_DIR=${PHPQA_HOME_DIR}/logs
+        volumes:
+          - ./src:/code
+          - ./.docker/qa-results:/logs
