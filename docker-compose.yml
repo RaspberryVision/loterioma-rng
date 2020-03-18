@@ -13,7 +13,7 @@ services:
           - .:/var/www/html
 
     loterioma_rng_qa:
-        image: raspberryvision/phpqa:0.1.0-stretch
+        image: raspberryvision/phpqa:0.1.2-stretch
         container_name: loterioma_rng_qa
         stdin_open: true
         tty: true
@@ -21,6 +21,7 @@ services:
             - PHPQA_HOME_DIR=/phpqa
             - PHPQA_CODE_DIR=${PHPQA_HOME_DIR}/code
             - PHPQA_LOGS_DIR=${PHPQA_HOME_DIR}/logs
+            - PHPQA_TEST_DIR=${PHPQA_HOME_DIR}/code
         volumes:
           - ./src:/code
           - ./.docker/qa-results:/logs
