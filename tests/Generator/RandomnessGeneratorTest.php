@@ -27,6 +27,17 @@ class RandomnessGeneratorTest extends TestCase
         ], $randomnessGenerator->getMatrix());
     }
 
+    public function testDoesImplementRandomGenerableInterface()
+    {
+        $randomnessGenerator = new RandomnessGenerator(213, [0, 5], [
+            [0, 0, 0],
+            [0, 0, 0],
+            [0, 0, 0]
+        ]);
+
+        $this->assertInstanceOf(RandomGenerableInterface::class, $randomnessGenerator);
+    }
+
     public function testSetCurrentState()
     {
 
