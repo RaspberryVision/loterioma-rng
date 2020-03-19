@@ -31,7 +31,7 @@ class GeneratingControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         /** @var array $resultedMatrix */
-        $resultedMatrix = $client->getResponse()->getContent();
+        $resultedMatrix = json_decode($client->getResponse()->getContent());
 
         foreach ($resultedMatrix as $indexY => $row) {
 
