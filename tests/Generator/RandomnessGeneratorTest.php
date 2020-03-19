@@ -58,28 +58,10 @@ class RandomnessGeneratorTest extends TestCase
     }
 
     /**
-     * Check if the method of setting the current state of the generator is working correctly.
-     */
-    public function testSetCurrentState()
-    {
-        $matrix = [
-            [-1, -1, -1],
-            [-1, -1, -1],
-            [-1, -1, -1]
-        ];
-
-        $randomnessGenerator = new RandomnessGenerator(213, [0, 5], $matrix);
-
-        $randomnessGenerator->setCurrentState(23);
-
-        $this->assertEquals(23, $randomnessGenerator->getCurrentState());
-    }
-
-    /**
      * The method that resets the current state of the generator
      * by entering a parameter can also be initialized.
      */
-    public function testReset()
+    public function testInit()
     {
         $matrix = [
             [-1, -1, -1],
@@ -89,13 +71,11 @@ class RandomnessGeneratorTest extends TestCase
 
         $randomnessGenerator = new RandomnessGenerator(213, [0, 5], $matrix);
 
-        $randomnessGenerator->setCurrentState(23);
+        $randomnessGenerator->init();
 
-        $randomnessGenerator->resetState();
+        $this->assertEquals(0, $randomnessGenerator->getSeed());
 
-        $this->assertEquals(0, $randomnessGenerator->getCurrentState());
-
-        $randomnessGenerator->resetState(20);
+        $randomnessGenerator->init(null, 20);
 
         $this->assertEquals(20, $randomnessGenerator->getCurrentState());
     }
@@ -114,17 +94,19 @@ class RandomnessGeneratorTest extends TestCase
 
         $randomnessGenerator = new RandomnessGenerator(213, [0, 5], $matrix);
 
-        foreach ($matrix as $row => $indexX) {
+        $randomnessGenerator->generate();
 
-            foreach ($row as $field => $indexY) {
+        foreach ($matrix as $indexX => $row) {
+
+            foreach ($row as $indexY => $field) {
 
                 $this->assertNotEquals(-1, $randomnessGenerator->getValue($indexX, $indexY));
 
                 $this->assertThat(
                     $randomnessGenerator->getValue($indexX, $indexY),
                     $this->logicalAnd(
-                        $this->greaterThan(0),
-                        $this->lessThan(5)
+                        $this->greaterThan(-1),
+                        $this->lessThan(6)
                     )
                 );
             }
