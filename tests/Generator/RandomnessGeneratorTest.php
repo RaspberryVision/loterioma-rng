@@ -14,9 +14,25 @@
 namespace App\Tests\Generator;
 
 use PHPUnit\Framework\TestCase;
+use App\Generator\RandomnessGenerableInterface;
+use App\Generator\RandomnessGenerator;
 
 class RandomnessGeneratorTest extends TestCase
 {
+    /**
+     * Check that RandomnessGenerator class implement RandomGenerableInterface.
+     */
+    public function testDoesImplementRandomGenerableInterface()
+    {
+        $randomnessGenerator = new RandomnessGenerator(213, [0, 5], [
+            [0, 0, 0],
+            [0, 0, 0],
+            [0, 0, 0]
+        ]);
+
+        $this->assertInstanceOf(RandomnessGenerableInterface::class, $randomnessGenerator);
+    }
+
     /**
      * Test that create new instance by constructor correctly sets field values.
      */
@@ -39,20 +55,6 @@ class RandomnessGeneratorTest extends TestCase
             [0, 0, 0],
             [0, 0, 0]
         ], $randomnessGenerator->getMatrix());
-    }
-
-    /**
-     * Check that RandomnessGenerator class implement RandomGenerableInterface.
-     */
-    public function testDoesImplementRandomGenerableInterface()
-    {
-        $randomnessGenerator = new RandomnessGenerator(213, [0, 5], [
-            [0, 0, 0],
-            [0, 0, 0],
-            [0, 0, 0]
-        ]);
-
-        $this->assertInstanceOf(RandomGenerableInterface::class, $randomnessGenerator);
     }
 
     /**
