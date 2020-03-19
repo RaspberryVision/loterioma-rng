@@ -16,11 +16,11 @@ interface RandomnessGenerableInterface
 {
     /**
      * The method which for all fields of the matrix draws numerical values
-     * from the range and saves them in the resulting matrix.
+     * from the range and saves them in the resulting matrix - return $resultMatrix.
      *
-     * @return bool
+     * @return array
      */
-    public function generate(): bool;
+    public function generate(): array;
 
     /**
      * Return the generator matrix in array format.
@@ -81,5 +81,14 @@ interface RandomnessGenerableInterface
      * @param int $state
      * @return bool
      */
-    public function init(int $seed = 0, int $state = 0): bool;
+    public function init(?int $seed = null, int $state = null): bool;
+
+    /**
+     * Return the value for a specific field of the result matrix.
+     *
+     * @param int $indexX
+     * @param int $indexY
+     * @return int
+     */
+    public function getValue(int $indexX, int $indexY): int;
 }
