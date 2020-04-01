@@ -18,6 +18,10 @@ use App\Exception\InvalidGeneratorRangeException;
 
 class RandomnessGenerator implements RandomnessGenerableInterface
 {
+    const MODE_LIVE = 0;
+    const MODE_TEST = 1;
+    const MODE_DEBUG = 2;
+
     /**
      * @var int Number represents current state in history of generator.
      */
@@ -29,32 +33,59 @@ class RandomnessGenerator implements RandomnessGenerableInterface
     private $seed;
 
     /**
-     * @var array An array with a range of random numbers.
+     * @var array $min Min number.
      */
-    private $range;
+    private $min;
 
     /**
-     * @var array Matrix for the draw.
+     * @var array $max Max number.
      */
-    private $matrix;
+    private $max;
+
+    /**
+     * @var $format
+     */
+    private $format;
+
+    /**
+     * @var int $mode
+     */
+    private $mode;
+
+    /**
+     * @var array $devOptions
+     */
+    private $devOptions;
 
     /**
      * @var array Result matrix, after generating the results are saved here.
      */
-    private $resultMatrix;
+    private $result;
 
     /**
      * RandomnessGenerator constructor.
+     * @param int $min
+     * @param int $max
+     * @param array $format
      * @param int $seed
-     * @param array $range
-     * @param array $matrix
+     * @param int $mode
+     * @param array $devOptions
      */
-    public function __construct(int $seed, array $range, array $matrix)
+    public function __construct(
+        int $min,
+        int $max,
+        array $format,
+        int $seed = 0,
+        int $mode = self::MODE_LIVE,
+        array $devOptions = []
+    )
     {
         $this->init($seed, 0);
-        $this->range = $range;
-        $this->matrix = $matrix;
-        $this->resultMatrix = $matrix;
+        $this->min = $min;
+        $this->max = $max;
+        $this->format = $format;
+        $this->mode = $mode;
+        $this->devOptions = $devOptions;
     }
 
     /**
@@ -65,34 +96,14 @@ class RandomnessGenerator implements RandomnessGenerableInterface
      */
     public function generate(): array
     {
-        foreach ($this->matrix as $indexY => $row) {
+        foreach ($this->format as $indexY => $row) {
 
             foreach ($row as $indexX => $field) {
-                $this->resultMatrix[$indexY][$indexX] = rand($this->getMin(), $this->getMax());
+                $this->result[$indexY][$indexX] = rand($this->getMin(), $this->getMax());
             }
         }
 
-        return $this->resultMatrix;
-    }
-
-    /**
-     * Return the generator matrix in array format.
-     *
-     * @return array
-     */
-    public function getMatrix(): array
-    {
-        return $this->matrix;
-    }
-
-    /**
-     * Return the range from which the numbers are drawn.
-     *
-     * @return array
-     */
-    public function getRange(): array
-    {
-        return $this->range;
+        return $this->result;
     }
 
     /**
@@ -102,11 +113,7 @@ class RandomnessGenerator implements RandomnessGenerableInterface
      */
     public function getMin(): int
     {
-        if (2 !== count($this->range)) {
-            throw new InvalidGeneratorRangeException("The generator compartment is not valid.");
-        }
-
-        return $this->range[0];
+        return $this->min;
     }
 
     /**
@@ -116,21 +123,7 @@ class RandomnessGenerator implements RandomnessGenerableInterface
      */
     public function getMax(): int
     {
-        if (2 !== count($this->range)) {
-            throw new InvalidGeneratorRangeException("The generator compartment is not valid.");
-        }
-
-        return $this->range[1];
-    }
-
-    /**
-     * Return the generator scoreboard, all randomly drawn numbers are entered on it.
-     *
-     * @return array
-     */
-    public function getResultMatrix(): array
-    {
-        return $this->resultMatrix;
+        return $this->max;
     }
 
     /**
@@ -180,10 +173,26 @@ class RandomnessGenerator implements RandomnessGenerableInterface
      */
     public function getValue(int $indexX, int $indexY): int
     {
-        if (isset($this->resultMatrix[$indexX][$indexY])) {
-            return $this->resultMatrix[$indexX][$indexY];
+        if (isset($this->result[$indexX][$indexY])) {
+            return $this->result[$indexX][$indexY];
         }
 
         return -1;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFormat(): array
+    {
+        return $this->format;
+    }
+
+    /**
+     * @return array
+     */
+    public function getResult(): array
+    {
+        return $this->result;
     }
 }

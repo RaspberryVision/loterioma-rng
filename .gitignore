@@ -13,7 +13,7 @@
 ###< symfony/framework-bundle ###
 
 ###> qa tools ###
-.docker/qa-results
+.docker/phpqa/results
 ###< qa tools ###
 
 ###> symfony/phpunit-bridge ###

@@ -27,13 +27,18 @@ class GeneratingController extends AbstractController
      */
     public function index(Request $request)
     {
+        /** @var mixed $options */
+        $options = json_decode($request->getContent(), true);
+
+        $randomnessOpt = $options['body'];
+
         $randomGenerator = new RandomnessGenerator(
-            $request->get('seed'),
-            [
-                $request->get('range')['min'],
-                $request->get('range')['max']
-            ],
-            $request->get('matrix')
+            $randomnessOpt['min'],
+            $randomnessOpt['max'],
+            $randomnessOpt['format'],
+            $randomnessOpt['seed'],
+            $randomnessOpt['mode'],
+            $randomnessOpt['devOptions']
         );
 
         return $this->json($randomGenerator->generate());

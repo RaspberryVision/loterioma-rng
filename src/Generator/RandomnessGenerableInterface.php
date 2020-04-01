@@ -27,14 +27,7 @@ interface RandomnessGenerableInterface
      *
      * @return array
      */
-    public function getMatrix(): array;
-
-    /**
-     * Return the range from which the numbers are drawn.
-     *
-     * @return array
-     */
-    public function getRange(): array;
+    public function getFormat(): array;
 
     /**
      * Returns the minimum value for a random range.
@@ -55,7 +48,7 @@ interface RandomnessGenerableInterface
      *
      * @return array
      */
-    public function getResultMatrix(): array;
+    public function getResult(): array;
 
     /**
      *

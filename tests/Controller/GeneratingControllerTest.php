@@ -26,7 +26,9 @@ class GeneratingControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/generate', $testCase['request']);
+        $client->request('GET', '/generate',
+            [], [], [], json_encode($testCase['request'])
+        );
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
@@ -60,6 +62,7 @@ class GeneratingControllerTest extends WebTestCase
             [
                 'request' => [
                     'seed' => 0,
+                    'type' => 0,
                     'range' => [
                         'min' => 1,
                         'max' => 10
