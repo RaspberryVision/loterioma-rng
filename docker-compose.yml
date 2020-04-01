@@ -30,7 +30,7 @@ services:
           - PHPQA_COMPONENT_NAME=rng
         volumes:
           - ./src:/code
-          - ./.docker/qa-results:/logs
+          - ./.docker/phpqa/results:/logs
         networks:
           - my-proxy-net
 
