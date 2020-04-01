@@ -96,3 +96,17 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 K. L. for every wonderful moment.
+
+
+### Requests
+
+1. Dice - get random number
+
+URL:
+```
+http://localhost:9901/index.php/generate
+```
+DATA:
+```
+{"min": 1, "max": 6, "format": [[-1]], "seed": 0, "mode":0, "devOptions": []}
+```
