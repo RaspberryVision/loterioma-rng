@@ -14,14 +14,8 @@
 
 namespace App\Generator;
 
-use App\Exception\InvalidGeneratorRangeException;
-
 class RandomnessGenerator implements RandomnessGenerableInterface
 {
-    const MODE_LIVE = 0;
-    const MODE_TEST = 1;
-    const MODE_DEBUG = 2;
-
     /**
      * @var int Number represents current state in history of generator.
      */
@@ -48,16 +42,6 @@ class RandomnessGenerator implements RandomnessGenerableInterface
     private $format;
 
     /**
-     * @var int $mode
-     */
-    private $mode;
-
-    /**
-     * @var array $devOptions
-     */
-    private $devOptions;
-
-    /**
      * @var array Result matrix, after generating the results are saved here.
      */
     private $result;
@@ -68,24 +52,18 @@ class RandomnessGenerator implements RandomnessGenerableInterface
      * @param int $max
      * @param array $format
      * @param int $seed
-     * @param int $mode
-     * @param array $devOptions
      */
     public function __construct(
         int $min,
         int $max,
         array $format,
-        int $seed = 0,
-        int $mode = self::MODE_LIVE,
-        array $devOptions = []
+        int $seed = 0
     )
     {
         $this->init($seed, 0);
         $this->min = $min;
         $this->max = $max;
         $this->format = $format;
-        $this->mode = $mode;
-        $this->devOptions = $devOptions;
     }
 
     /**
@@ -93,13 +71,28 @@ class RandomnessGenerator implements RandomnessGenerableInterface
      * from the range and saves them in the resulting matrix.
      *
      * @return array
+     * @throws \Exception
      */
     public function generate(): array
     {
-        foreach ($this->format as $indexY => $row) {
+        if (!is_array($this->format)) {
+            return [
+                'error' => 'Wrong matrix format!'
+            ];
+        }
 
-            foreach ($row as $indexX => $field) {
-                $this->result[$indexY][$indexX] = rand($this->getMin(), $this->getMax());
+        foreach ($this->format as $indexY =>$row) {
+
+            $decodedRow = json_decode($row, true);
+
+            if (!is_array($decodedRow)) {
+                return [
+                    'error' => 'Wrong matrix format!'
+                ];
+            }
+
+            foreach ($decodedRow as $indexX => $field) {
+                $this->result[$indexY][$indexX] = random_int($this->getMin(), $this->getMax());
             }
         }
 
