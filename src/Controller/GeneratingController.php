@@ -34,9 +34,7 @@ class GeneratingController extends AbstractController
             $options['min'],
             $options['max'],
             $options['format'],
-            $options['seed'],
-            $options['mode'],
-            $options['devOptions']
+            $options['seed']
         );
 
         return $this->json($randomGenerator->generate());
