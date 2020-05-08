@@ -6,7 +6,7 @@ services:
         stdin_open: true
         tty: true
         ports:
-          - 9901:80
+          - 5501:80
         environment:
           - APACHE_DOCUMENT_ROOT=/var/www/html/public
         volumes:
@@ -14,25 +14,25 @@ services:
         networks:
           - my-proxy-net
 
-    loterioma_rng_qa:
-        build: .docker/phpqa
-        container_name: loterioma_rng_qa
-        stdin_open: true
-        tty: true
-        environment:
-          - PHPQA_HOME_DIR=/phpqa
-          - PHPQA_CODE_DIR=${PHPQA_HOME_DIR}/code
-          - PHPQA_LOGS_DIR=${PHPQA_HOME_DIR}/logs
-          - PHPQA_TEST_DIR=${PHPQA_HOME_DIR}/code
-          - PHPQA_ENGINEER_HOST=loterioma_engineer
-          - PHPQA_ENGINEER_PORT=80
-          - PHPQA_MACHINE_NAME=dev-local-rm
-          - PHPQA_COMPONENT_NAME=rng
-        volumes:
-          - ./src:/code
-          - ./.docker/phpqa/results:/logs
-        networks:
-          - my-proxy-net
+#    loterioma_rng_qa:
+#        build: .docker/phpqa
+#        container_name: loterioma_rng_qa
+#        stdin_open: true
+#        tty: true
+#        environment:
+#          - PHPQA_HOME_DIR=/phpqa
+#          - PHPQA_CODE_DIR=${PHPQA_HOME_DIR}/code
+#          - PHPQA_LOGS_DIR=${PHPQA_HOME_DIR}/logs
+#          - PHPQA_TEST_DIR=${PHPQA_HOME_DIR}/code
+#          - PHPQA_ENGINEER_HOST=loterioma_engineer
+#          - PHPQA_ENGINEER_PORT=80
+#          - PHPQA_MACHINE_NAME=dev-local-rm
+#          - PHPQA_COMPONENT_NAME=rng
+#        volumes:
+#          - ./src:/code
+#          - ./.docker/phpqa/results:/logs
+#        networks:
+#          - my-proxy-net
 
 networks:
     my-proxy-net:
