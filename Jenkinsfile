@@ -1,7 +1,7 @@
 pipeline {
     agent {
         dockerfile {
-            dir 'docker/php'
+            dir '.docker/php'
         }
     }
     stages {
