@@ -3,6 +3,7 @@ pipeline {
         dockerfile {
             dir '.docker/php'
         }
+        args '-u root --privileged'
     }
     stages {
         stage('build') {
