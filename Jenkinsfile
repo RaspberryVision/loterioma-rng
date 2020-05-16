@@ -2,8 +2,8 @@ pipeline {
     agent {
         dockerfile {
             dir '.docker/php'
+            args '-u root --privileged'
         }
-        args '-u root --privileged'
     }
     stages {
         stage('build') {
