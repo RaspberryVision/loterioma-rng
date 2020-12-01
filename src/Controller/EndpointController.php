@@ -1,14 +1,4 @@
 <?php
-/**
- * Generating Controller class.
- *
- * ~
- *
- * @category   Controllers
- * @package    App\Controller
- * @author     Rafal Malik <kontakt@raspberryvision.pl>
- * @copyright  03.2020 Raspberry Vision
- */
 
 namespace App\Controller;
 
@@ -18,16 +8,17 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class GeneratingController extends AbstractController
+class EndpointController extends AbstractController
 {
     /**
-     * @Route("/generate", name="app_generate")
+     * @Route("/random", name="web_endpoint_random")
      * @param Request $request
      * @return JsonResponse
+     * @throws \Exception
      */
-    public function index(Request $request)
+    public function random(Request $request)
     {
-        /** @var mixed $options */
+        /** @var array $options */
         $options = json_decode($request->getContent(), true);
 
         $randomGenerator = new RandomnessGenerator(
