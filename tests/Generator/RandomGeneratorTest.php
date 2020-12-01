@@ -13,23 +13,23 @@
 
 namespace App\Tests\Generator;
 
+use App\Generator\RandomGeneratorInterface;
 use PHPUnit\Framework\TestCase;
-use App\Generator\RandomnessGenerableInterface;
-use App\Generator\RandomnessGenerator;
+use App\Generator\RandomGenerator;
 
-class RandomnessGeneratorTest extends TestCase
+class RandomGeneratorTest extends TestCase
 {
     /**
-     * Check that RandomnessGenerator class implement RandomGenerableInterface.
+     * Check that RandomGenerator class implement RandomGeneratorInterface.
      *
      * @dataProvider dataProviderCreateInstance
      * @param array $testCase
      */
-    public function testDoesImplementRandomGenerableInterface(array $testCase)
+    public function testDoesImplementRandomGeneratorInterface(array $testCase)
     {
-        $randomnessGenerator = $this->createGenerator($testCase);
+        $randomGenerator = $this->createGenerator($testCase);
 
-        $this->assertInstanceOf(RandomnessGenerableInterface::class, $randomnessGenerator);
+        $this->assertInstanceOf(RandomGeneratorInterface::class, $randomGenerator);
     }
 
     /**
@@ -45,9 +45,9 @@ class RandomnessGeneratorTest extends TestCase
         );
 
         $this->assertEquals($testCase['seed'], $randomnessGenerator->getSeed());
-        $this->assertEquals($testCase['range']['min'], $randomnessGenerator->getMin());
-        $this->assertEquals($testCase['range']['max'], $randomnessGenerator->getMax());
-        $this->assertEquals($testCase['matrix'], $randomnessGenerator->getMatrix());
+        $this->assertEquals($testCase['min'], $randomnessGenerator->getMin());
+        $this->assertEquals($testCase['max'], $randomnessGenerator->getMax());
+        $this->assertEquals($testCase['format'], $randomnessGenerator->getFormat());
     }
 
     /**
@@ -60,15 +60,13 @@ class RandomnessGeneratorTest extends TestCase
         yield [
             [
                 'seed' => 0,
-                'range' => [
-                    'min' => 0,
-                    'max' => 10
-                ],
-                'matrix' => [
+                'min' => 0,
+                'max' => 10,
+                'format' => [
                     [-1, -1],
-                    [-1, -1]
-                ]
-            ]
+                    [-1, -1],
+                ],
+            ],
         ];
     }
 
@@ -100,15 +98,13 @@ class RandomnessGeneratorTest extends TestCase
         yield [
             [
                 'seed' => 0,
-                'range' => [
-                    'min' => 0,
-                    'max' => 10
-                ],
-                'matrix' => [
+                'min' => 0,
+                'max' => 10,
+                'format' => [
                     [-1, -1],
-                    [-1, -1]
-                ]
-            ]
+                    [-1, -1],
+                ],
+            ],
         ];
     }
 
@@ -123,21 +119,17 @@ class RandomnessGeneratorTest extends TestCase
     {
         $randomnessGenerator = $this->createGenerator($testCase);
 
-        $randomnessGenerator->generate();
-
-        foreach ($randomnessGenerator->getMatrix() as $indexX => $row) {
+        foreach ($randomnessGenerator->generate() as $indexX => $row) {
 
             foreach ($row as $indexY => $field) {
 
-                $this->assertNotEquals(-1, $randomnessGenerator->getValue(
-                    $indexX, $indexY
-                ));
+                $this->assertNotEquals(-1, $field);
 
                 $this->assertThat(
                     $randomnessGenerator->getValue($indexX, $indexY),
                     $this->logicalAnd(
-                        $this->greaterThan($testCase['range']['min'] - 1),
-                        $this->lessThan($testCase['range']['max'] + 1)
+                        $this->greaterThan($testCase['min'] - 1),
+                        $this->lessThan($testCase['max'] + 1)
                     )
                 );
             }
@@ -154,32 +146,39 @@ class RandomnessGeneratorTest extends TestCase
         yield [
             [
                 'seed' => 0,
-                'range' => [
-                    'min' => 0,
-                    'max' => 10
-                ],
-                'matrix' => [
+                'min' => 0,
+                'max' => 10,
+                'format' => [
                     [-1, -1],
-                    [-1, -1]
-                ]
-            ]
+                    [-1, -1],
+                ],
+            ],
+        ];
+        yield [
+            [
+                'seed' => 0,
+                'min' => 0,
+                'max' => 4,
+                'format' => [
+                    [-1, 2],
+                    [-1, -1],
+                ],
+            ],
         ];
     }
 
     /**
      * Helper method to create generator with params and return it to test.
      * @param array $testCase
-     * @return RandomnessGenerator
+     * @return RandomGenerator
      */
     private function createGenerator(array $testCase)
     {
-        return new RandomnessGenerator(
-            $testCase['seed'],
-            [
-                $testCase['range']['min'],
-                $testCase['range']['max']
-            ],
-            $testCase['matrix']
+        return new RandomGenerator(
+            $testCase['min'],
+            $testCase['max'],
+            $testCase['format'],
+            $testCase['seed']
         );
     }
 }

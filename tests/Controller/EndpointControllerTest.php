@@ -22,7 +22,7 @@ class EndpointControllerTest extends WebTestCase
      * @dataProvider dataProviderTestGenerate
      * @param array $testCase
      */
-    public function testRandom(array $testCase)
+    public function testGenerate(array $testCase)
     {
         $client = static::createClient(
             [],
@@ -33,7 +33,7 @@ class EndpointControllerTest extends WebTestCase
 
         $client->request(
             'GET',
-            '/random',
+            '/generate',
             [],
             [],
             [],
