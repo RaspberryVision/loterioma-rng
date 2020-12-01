@@ -16,6 +16,4 @@ class GeneratorLogger
     {
         $this->logger = $logger;
     }
-
-
 }
