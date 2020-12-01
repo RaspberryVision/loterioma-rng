@@ -1,1 +1,1 @@
-FROM raspberryvision/base-symfony:0.0.3-microservice
+FROM raspberryvision/base-symfony:microservice
