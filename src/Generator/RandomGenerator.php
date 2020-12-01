@@ -14,7 +14,7 @@
 
 namespace App\Generator;
 
-class RandomnessGenerator implements RandomnessGenerableInterface
+class RandomGenerator implements RandomGeneratorInterface
 {
     /**
      * @var int Number represents current state in history of generator.
@@ -52,18 +52,20 @@ class RandomnessGenerator implements RandomnessGenerableInterface
      * @param int $max
      * @param array $format
      * @param int $seed
+     * @param array|null $result
      */
     public function __construct(
         int $min,
         int $max,
         array $format,
-        int $seed = 0
-    )
-    {
+        int $seed = 0,
+        ?array $result = []
+    ) {
         $this->init($seed, 0);
         $this->min = $min;
         $this->max = $max;
         $this->format = $format;
+        $this->result = $result;
     }
 
     /**
@@ -77,21 +79,12 @@ class RandomnessGenerator implements RandomnessGenerableInterface
     {
         if (!is_array($this->format)) {
             return [
-                'error' => 'Wrong matrix format!'
+                'error' => 'Wrong matrix format!',
             ];
         }
 
-        foreach ($this->format as $indexY =>$row) {
-
-            $decodedRow = json_decode($row, true);
-
-            if (!is_array($decodedRow)) {
-                return [
-                    'error' => 'Wrong matrix format!'
-                ];
-            }
-
-            foreach ($decodedRow as $indexX => $field) {
+        foreach ($this->format as $indexY => $row) {
+            foreach ($row as $indexX => $field) {
                 $this->result[$indexY][$indexX] = random_int($this->getMin(), $this->getMax());
             }
         }

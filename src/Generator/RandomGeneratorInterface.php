@@ -12,7 +12,7 @@
 
 namespace App\Generator;
 
-interface RandomnessGenerableInterface
+interface RandomGeneratorInterface
 {
     /**
      * The method which for all fields of the matrix draws numerical values
