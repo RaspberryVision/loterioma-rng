@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        dockerfile {
+            dir '.docker/php'
+        }
+    }
 
     stages {
         stage('Build') {
