@@ -2,13 +2,15 @@ pipeline {
     agent {
         dockerfile {
             dir '.docker/php'
+            args '-u root --privileged --entrypoint='
         }
     }
 
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo "Building..."
+                sh 'composer install'
             }
         }
         stage('Test') {
