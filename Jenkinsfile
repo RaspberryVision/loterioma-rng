@@ -23,7 +23,6 @@ pipeline {
             steps {
                 sh 'vendor/bin/phpcs -p --report=checkstyle --report-file=`pwd`/reports/checkstyle-result.xml --standard=PSR2 src/ || exit 0'
                 sh 'vendor/bin/phpcpd --progress --log-pmd=reports/cpd.xml src/ || exit 0'
-                sh 'vendor/bin/phploc --log-xml=reports/phploc.xml --log-csv=reports/phploc.csv src/'
             }
         }
     }
