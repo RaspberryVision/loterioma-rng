@@ -1,7 +1,7 @@
 pipeline {
     agent {
         dockerfile {
-            dir '.docker/phpqa'
+            dir '.docker/php'
             args '-u root --privileged --entrypoint='
         }
     }
