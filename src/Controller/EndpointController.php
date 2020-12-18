@@ -11,6 +11,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class EndpointController extends AbstractController
 {
     /**
+     * @Route("/", name="web_endpoint_index")
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function index(Request $request)
+    {
+        return $this->json(['RNG App']);
+    }
+
+    /**
      * @Route("/generate", name="web_endpoint_generate")
      * @param Request $request
      * @return JsonResponse
