@@ -17,14 +17,12 @@ class GeneratorResult
     /**
      * @var string
      * @MongoDB\Field(type="string")
-     * @Serializer\Groups({"api_response"})
      */
     protected $externalId;
 
     /**
      * @var string
      * @MongoDB\Field(type="string")
-     * @Serializer\Groups({"api_response"})
      */
     protected $content;
 
