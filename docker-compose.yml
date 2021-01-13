@@ -4,17 +4,21 @@ services:
   loterioma_rng_db:
     image: mongo
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME: loterioma
+      MONGO_INITDB_ROOT_PASSWORD: loterioma
+    networks:
+      - my-proxy-net
 
   loterioma_rng_dbadmin:
     image: mongo-express
     ports:
       - 8081:8081
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_ADMINUSERNAME: loterioma
+      ME_CONFIG_MONGODB_ADMINPASSWORD: loterioma
       ME_CONFIG_MONGODB_SERVER: loterioma_rng_db
+    networks:
+      - my-proxy-net
 
   loterioma_rng:
     build: .docker/php
