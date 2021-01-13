@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Document\GeneratorResult;
 use App\Generator\RandomGenerator;
+use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,7 +29,7 @@ class EndpointController extends AbstractController
      * @return JsonResponse
      * @throws \Exception
      */
-    public function generate(Request $request)
+    public function generate(Request $request, DocumentManager $documentManager)
     {
         /** @var array $options */
         $options = json_decode($request->getContent(), true);
@@ -39,6 +41,9 @@ class EndpointController extends AbstractController
             $options['seed'],
             $options['result'] ?? []
         );
+
+        $documentManager->persist(new GeneratorResult(uniqid(), json_encode($options)));
+        $documentManager->flush();
 
         if ($randomGenerator->getResult()) {
             return $this->json($randomGenerator->getResult());
