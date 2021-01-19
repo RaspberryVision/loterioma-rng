@@ -18,9 +18,11 @@ class EndpointController extends AbstractController
      * @return JsonResponse
      * @throws \Exception
      */
-    public function index(Request $request)
+    public function index(Request $request, DocumentManager $documentManager)
     {
-        return $this->json(['RNG App']);
+        return $this->json(
+            ['name' => 'LoterioMa RNG', 'records' => count($documentManager->getRepository(GeneratorResult::class)->findAll())]
+        );
     }
 
     /**
