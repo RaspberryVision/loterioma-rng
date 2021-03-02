@@ -55,6 +55,9 @@
     "doctrine/reflection": {
         "version": "1.2.1"
     },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.3"
+    },
     "jean85/pretty-package-versions": {
         "version": "1.5.1"
     },
@@ -91,6 +94,15 @@
     "php": {
         "version": "7.4"
     },
+    "phploc/phploc": {
+        "version": "7.0.2"
+    },
+    "phpunit/php-file-iterator": {
+        "version": "3.0.5"
+    },
+    "phpunit/php-timer": {
+        "version": "5.0.3"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -102,6 +114,27 @@
     },
     "psr/log": {
         "version": "1.1.2"
+    },
+    "sebastian/cli-parser": {
+        "version": "1.0.1"
+    },
+    "sebastian/phpcpd": {
+        "version": "6.0.3"
+    },
+    "sebastian/version": {
+        "version": "3.0.2"
+    },
+    "squizlabs/php_codesniffer": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "0dc9cceda799fd3a08b96987e176a261028a3709"
+        },
+        "files": [
+            "phpcs.xml.dist"
+        ]
     },
     "symfony/apache-pack": {
         "version": "1.0",
