@@ -55,12 +55,12 @@ pipeline {
         }
         stage('Yaml linter') {
             steps {
-                sh 'vendor/bin/yaml-lint config/services.yaml > reports/yaml-lint.html || exit 0'
+                sh 'vendor/bin/yaml-lint config/services.yaml > reports/yaml-lint/index.html || exit 0'
                 publishHTML (target: [
                     allowMissing: false,
                     alwaysLinkToLastBuild: false,
                     keepAll: true,
-                    reportDir: 'reports/yaml-linter/',
+                    reportDir: 'reports/yaml-lint/',
                     reportFiles: 'index.html',
                     reportName:'Yaml Linter'
                 ])
