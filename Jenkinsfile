@@ -21,7 +21,7 @@ pipeline {
                 sh 'vendor/bin/phploc --log-xml=reports/phploc.xml --log-csv=reports/phploc.csv src/'
                 sh 'vendor/bin/churn run src/ --format json > reports/churn.json'
                 sh 'vendor/bin/phpstan analyse --error-format=junit -l 8 src tests > reports/phpstan.xml || exit 0'
-                sh 'vendor/bin/psalm > reports/psalm.txt'
+                sh 'vendor/bin/psalm > reports/psalm.txt || exit 0'
             }
         }
         stage('report') {
