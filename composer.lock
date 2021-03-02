@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "601bf85f9e088fde876bfc2bd3b3e9f7",
+    "content-hash": "1ef57142bc5447c70d3928f8d6632b10",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -924,6 +924,65 @@
                 }
             ],
             "time": "2021-01-14T21:52:44+00:00"
+        },
+        {
+            "name": "j13k/yaml-lint",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/j13k/yaml-lint.git",
+                "reference": "513abdb2df259877bbbcc05d41bbe11d5fc6d292"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/j13k/yaml-lint/zipball/513abdb2df259877bbbcc05d41bbe11d5fc6d292",
+                "reference": "513abdb2df259877bbbcc05d41bbe11d5fc6d292",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/yaml": "^2|^3|^4|^5"
+            },
+            "default-branch": true,
+            "bin": [
+                "bin/yaml-lint"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "J13k\\YamlLint\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "John Fitzpatrick",
+                    "homepage": "http://github.com/j13k"
+                }
+            ],
+            "description": "A compact command line utility for checking YAML file syntax",
+            "homepage": "https://github.com/j13k/yaml-lint",
+            "keywords": [
+                "cli",
+                "lint",
+                "symfony",
+                "syntax",
+                "utility",
+                "yaml",
+                "yml"
+            ],
+            "support": {
+                "issues": "https://github.com/j13k/yaml-lint/issues",
+                "source": "https://github.com/j13k/yaml-lint/tree/master"
+            },
+            "time": "2021-02-03T06:07:04+00:00"
         },
         {
             "name": "jean85/pretty-package-versions",
@@ -6990,7 +7049,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "j13k/yaml-lint": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

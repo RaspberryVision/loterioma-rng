@@ -85,6 +85,9 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
     },
+    "j13k/yaml-lint": {
+        "version": "1.1.x-dev"
+    },
     "jean85/pretty-package-versions": {
         "version": "1.5.1"
     },
