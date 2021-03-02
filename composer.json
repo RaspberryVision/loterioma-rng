@@ -34,6 +34,7 @@
     "symfony/css-selector": "5.2.*",
     "symfony/maker-bundle": "^1.14",
     "symfony/phpunit-bridge": "^5.2",
+    "theseer/phpdox": "dev-master",
     "vimeo/psalm": "^4.6"
   },
   "config": {

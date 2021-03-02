@@ -40,6 +40,20 @@ pipeline {
                 recordIssues enabledForFailure: true, tool: pmdParser(), qualityGates: [[threshold: 10, type: 'TOTAL', unstable: true]], healthy: 10, unhealthy: 100, minimumSeverity: 'HIGH'
             }
         }
+        stage('display') {
+            steps {
+                sh 'vendor/bin/phpdox -f reports/config/phpdox.xml'
+                publishHTML (target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: 'reports/phpdox/html',
+                    reportFiles: 'index.html',
+                    reportName:'PHPDox Documentation'
+                ])
+
+            }
+        }
         stage('Yaml linter') {
             steps {
                 sh 'vendor/bin/yaml-lint config/services.yaml > reports/yaml-linl.html || exit 0'

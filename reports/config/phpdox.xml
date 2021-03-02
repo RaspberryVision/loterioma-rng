@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpdox xmlns="http://xml.phpdox.net/config" silent="false">
+    <bootstrap />
+    <project name="phpdox" source="${basedir}/../../src"
+             workdir="${basedir}/../phpdox/xml">
+        <collector publiconly="false" backend="parser"
+                   encoding="auto">
+            <include mask="*.php" />
+            <exclude mask="" />
+            <inheritance resolve="true">
+            </inheritance>
+        </collector>
+        <generator output="${basedir}/../phpdox">
+            <enrich base="${basedir}/..">
+                <source type="phploc">
+                    <file name="phploc.xml" />
+                </source>
+                <source type="checkstyle">
+                    <file name="checkstyle-result.xml" />
+                </source>
+                <source type="phpcs">
+                    <file name="checkstyle-result.xml" />
+                </source>
+                <source type="pmd">
+                    <file name="pmd.xml" />
+                </source>
+                <source type="phpunit">
+                    <coverage path="." />
+                </source>
+            </enrich>
+            <build engine="html" enabled="true" output="html">
+                <template dir="${phpDox.home}/templates/html" />
+                <file extension="html" />
+            </build>
+        </generator>
+    </project>
+</phpdox>

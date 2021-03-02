@@ -122,6 +122,10 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symplify/smart-file-system" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symplify/symfony-php-config" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symplify/symplify-kernel" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/theseer/directoryscanner" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/theseer/fdomdocument" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/theseer/fxsl" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/theseer/phpdox" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/vimeo/psalm" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/path-util" />
