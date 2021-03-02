@@ -12,6 +12,19 @@ pipeline {
                 sh 'composer install'
             }
         }
+        stage('Yaml linter') {
+            steps {
+                sh 'sh .docker/scripts/yaml-lint.sh'
+                publishHTML (target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: 'reports/yaml-lint/',
+                    reportFiles: 'index.html',
+                    reportName: 'Yaml Lint'
+                ])
+            }
+        }
         stage('analyze') {
             steps {
                 sh 'vendor/bin/phpcs -p --report=checkstyle --report-file=`pwd`/reports/checkstyle-result.xml --standard=PSR2 src/ || exit 0'
@@ -40,7 +53,7 @@ pipeline {
                 recordIssues enabledForFailure: true, tool: pmdParser(), qualityGates: [[threshold: 10, type: 'TOTAL', unstable: true]], healthy: 10, unhealthy: 100, minimumSeverity: 'HIGH'
             }
         }
-        stage('display') {
+        stage('Documentation') {
             steps {
                 sh 'vendor/bin/phpdox -f reports/config/phpdox.xml'
                 publishHTML (target: [
@@ -50,20 +63,6 @@ pipeline {
                     reportDir: 'reports/phpdox/html',
                     reportFiles: 'index.html',
                     reportName:'PHPDox Documentation'
-                ])
-            }
-        }
-        stage('Yaml linter') {
-            steps {
-                sh 'mkdir reports/yaml-lint'
-                sh 'vendor/bin/yaml-lint config/services.yaml > reports/yaml-lint/index.html || exit 0'
-                publishHTML (target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: 'reports/yaml-lint/',
-                    reportFiles: 'index.html',
-                    reportName:'Yaml Linter'
                 ])
             }
         }
