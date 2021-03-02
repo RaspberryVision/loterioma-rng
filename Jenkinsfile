@@ -25,6 +25,19 @@ pipeline {
                 ])
             }
         }
+        stage('Code sniffer') {
+            steps {
+                sh 'sh .docker/scripts/code-sniffer.sh'
+                publishHTML (target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: 'reports/code-sniffer/',
+                    reportFiles: 'index.html',
+                    reportName: 'Code sniffer'
+                ])
+            }
+        }
         stage('analyze') {
             steps {
                 sh 'vendor/bin/phpcs -p --report=checkstyle --report-file=`pwd`/reports/checkstyle-result.xml --standard=PSR2 src/ || exit 0'
