@@ -55,7 +55,7 @@ pipeline {
         }
         stage('Yaml linter') {
             steps {
-                sh 'mkdir reports/yaml-linter'
+                sh 'mkdir reports/yaml-lint'
                 sh 'vendor/bin/yaml-lint config/services.yaml > reports/yaml-lint/index.html || exit 0'
                 publishHTML (target: [
                     allowMissing: false,
