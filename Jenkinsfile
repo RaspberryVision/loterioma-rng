@@ -20,6 +20,7 @@ pipeline {
                 sh 'vendor/bin/phpmd src/ xml reports/config/ruleset.xml --ignore-violations-on-exit --reportfile reports/pmd.xml'
                 sh 'vendor/bin/phploc --log-xml=reports/phploc.xml --log-csv=reports/phploc.csv src/'
                 sh 'vendor/bin/churn run src/ --format json > reports/churn.json'
+                sh 'vendor/bin/phpstan analyse --error-format=junit -l 8 src tests > reports/phpstan.xml'
             }
         }
         stage('report') {

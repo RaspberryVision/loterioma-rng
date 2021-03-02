@@ -1,4 +1,7 @@
 {
+    "beberlei/assert": {
+        "version": "v3.3.0"
+    },
     "bmitch/churn-php": {
         "version": "1.5.0"
     },
@@ -76,6 +79,9 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.1.1"
     },
+    "lstrojny/functional-php": {
+        "version": "1.15.0"
+    },
     "mongodb/mongodb": {
         "version": "1.8.0"
     },
@@ -103,11 +109,23 @@
     "php": {
         "version": "7.4"
     },
+    "phpbench/container": {
+        "version": "1.2.1"
+    },
+    "phpbench/dom": {
+        "version": "0.2.0"
+    },
+    "phpbench/phpbench": {
+        "version": "0.17.1"
+    },
     "phploc/phploc": {
         "version": "7.0.2"
     },
     "phpmd/phpmd": {
         "version": "2.9.1"
+    },
+    "phpstan/phpstan": {
+        "version": "0.12.80"
     },
     "phpunit/php-file-iterator": {
         "version": "3.0.5"
@@ -135,6 +153,9 @@
     },
     "sebastian/version": {
         "version": "3.0.2"
+    },
+    "seld/jsonlint": {
+        "version": "1.8.3"
     },
     "squizlabs/php_codesniffer": {
         "version": "3.0",
@@ -184,6 +205,9 @@
     },
     "symfony/css-selector": {
         "version": "v5.0.5"
+    },
+    "symfony/debug": {
+        "version": "v4.4.19"
     },
     "symfony/dependency-injection": {
         "version": "v4.4.5"
@@ -338,5 +362,8 @@
     },
     "webmozart/assert": {
         "version": "1.9.1"
+    },
+    "webmozart/path-util": {
+        "version": "2.3.0"
     }
 }
