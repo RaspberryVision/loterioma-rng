@@ -85,6 +85,9 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
     },
+    "friendsoftwig/twigcs": {
+        "version": "v5.0.0"
+    },
     "j13k/yaml-lint": {
         "version": "1.1.x-dev"
     },
@@ -120,6 +123,18 @@
     },
     "netresearch/jsonmapper": {
         "version": "v2.1.0"
+    },
+    "nette/finder": {
+        "version": "v2.5.2"
+    },
+    "nette/neon": {
+        "version": "v3.2.2"
+    },
+    "nette/robot-loader": {
+        "version": "v3.3.1"
+    },
+    "nette/utils": {
+        "version": "v3.2.1"
     },
     "nikic/php-parser": {
         "version": "v4.3.0"
@@ -160,8 +175,14 @@
     "phpmd/phpmd": {
         "version": "2.9.1"
     },
+    "phpstan/phpdoc-parser": {
+        "version": "0.4.12"
+    },
     "phpstan/phpstan": {
         "version": "0.12.80"
+    },
+    "phpstan/phpstan-phpunit": {
+        "version": "0.12.17"
     },
     "phpstan/phpstan-symfony": {
         "version": "0.12.20"
@@ -183,6 +204,12 @@
     },
     "psr/log": {
         "version": "1.1.2"
+    },
+    "psr/simple-cache": {
+        "version": "1.0.1"
+    },
+    "rector/rector": {
+        "version": "dev-master"
     },
     "sebastian/cli-parser": {
         "version": "1.0.1"
@@ -275,6 +302,9 @@
     "symfony/event-dispatcher-contracts": {
         "version": "v1.1.7"
     },
+    "symfony/expression-language": {
+        "version": "v5.2.3"
+    },
     "symfony/filesystem": {
         "version": "v4.4.5"
     },
@@ -313,6 +343,9 @@
             "src/Kernel.php"
         ]
     },
+    "symfony/http-client-contracts": {
+        "version": "v2.3.1"
+    },
     "symfony/http-foundation": {
         "version": "v4.4.5"
     },
@@ -327,9 +360,6 @@
             "version": "1.0",
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
-    },
-    "symfony/mime": {
-        "version": "v4.4.5"
     },
     "symfony/options-resolver": {
         "version": "v5.0.11"
@@ -349,16 +379,13 @@
             "tests/bootstrap.php"
         ]
     },
-    "symfony/polyfill-intl-idn": {
-        "version": "v1.14.0"
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.22.1"
     },
     "symfony/polyfill-intl-normalizer": {
-        "version": "v1.20.0"
+        "version": "v1.22.1"
     },
     "symfony/polyfill-mbstring": {
-        "version": "v1.14.0"
-    },
-    "symfony/polyfill-php72": {
         "version": "v1.14.0"
     },
     "symfony/polyfill-php73": {
@@ -390,6 +417,9 @@
     "symfony/stopwatch": {
         "version": "v5.0.11"
     },
+    "symfony/string": {
+        "version": "v5.1.11"
+    },
     "symfony/var-dumper": {
         "version": "v4.4.5"
     },
@@ -398,6 +428,54 @@
     },
     "symfony/yaml": {
         "version": "v4.4.5"
+    },
+    "symplify/astral": {
+        "version": "v9.2.4"
+    },
+    "symplify/autowire-array-parameter": {
+        "version": "v9.2.4"
+    },
+    "symplify/composer-json-manipulator": {
+        "version": "v9.2.4"
+    },
+    "symplify/console-color-diff": {
+        "version": "v9.2.4"
+    },
+    "symplify/console-package-builder": {
+        "version": "v9.2.4"
+    },
+    "symplify/easy-testing": {
+        "version": "v9.2.4"
+    },
+    "symplify/markdown-diff": {
+        "version": "v9.2.4"
+    },
+    "symplify/package-builder": {
+        "version": "v9.2.4"
+    },
+    "symplify/php-config-printer": {
+        "version": "v9.2.4"
+    },
+    "symplify/rule-doc-generator": {
+        "version": "v9.2.4"
+    },
+    "symplify/set-config-resolver": {
+        "version": "v9.2.4"
+    },
+    "symplify/simple-php-doc-parser": {
+        "version": "v9.2.4"
+    },
+    "symplify/skipper": {
+        "version": "v9.2.4"
+    },
+    "symplify/smart-file-system": {
+        "version": "v9.2.4"
+    },
+    "symplify/symfony-php-config": {
+        "version": "v9.2.4"
+    },
+    "symplify/symplify-kernel": {
+        "version": "v9.2.4"
     },
     "vimeo/psalm": {
         "version": "4.6.2"
