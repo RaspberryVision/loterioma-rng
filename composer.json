@@ -25,6 +25,7 @@
     "phpbench/phpbench": "^0.17.1",
     "phploc/phploc": "^7.0.2",
     "phpmd/phpmd": "^2.8",
+    "phpmetrics/phpmetrics": "^2.7",
     "phpstan/phpstan": "^0.12.80",
     "phpstan/phpstan-symfony": "^0.12.20",
     "rector/rector": "dev-master",
