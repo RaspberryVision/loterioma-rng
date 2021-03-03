@@ -16,144 +16,66 @@ pipeline {
             steps {
                 sh 'sh .docker/scripts/yaml-lint.sh'
                 publishHTMLReport('.reports/yaml-lint', 'index.html', 'Yaml linter')
-//                 publishHTML (target: [
-//                     allowMissing: false,
-//                     alwaysLinkToLastBuild: false,
-//                     keepAll: true,
-//                     reportDir: '.reports/yaml-lint/',
-//                     reportFiles: 'index.html',
-//                     reportName: 'Yaml Lint'
-//                 ])
             }
         }
         stage('Code sniffer') {
             steps {
                 sh 'sh .docker/scripts/phpcs.sh'
-                publishHTML (target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: '.reports/phpcs/',
-                    reportFiles: 'index.html',
-                    reportName: 'Code sniffer'
-                ])
+                publishHTMLReport('.reports/phpcs', 'index.html', 'Code sniffer')
             }
         }
         stage('Code Paste Detector') {
             steps {
                 sh 'sh .docker/scripts/phpcpd.sh'
-                publishHTML (target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: '.reports/phpcpd/',
-                    reportFiles: 'index.html',
-                    reportName: 'Code Paste Detector'
-                ])
+                publishHTMLReport('.reports/phpcpd', 'index.html', 'Code Paste Detector')
             }
         }
-        stage('PHP Depend') {
+        stage('Depend') {
             steps {
                 sh 'sh .docker/scripts/pdepend.sh'
-                publishHTML (target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: '.reports/pdepend/',
-                    reportFiles: 'index.html',
-                    reportName: 'Code sniffer'
-                ])
+                publishHTMLReport('.reports/pdepend', 'index.html', 'PHP Depend')
             }
         }
         stage('Mess Detector') {
             steps {
                 sh 'sh .docker/scripts/phpmd.sh'
-                publishHTML (target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: '.reports/phpmd/',
-                    reportFiles: 'index.html',
-                    reportName: 'Mess Detector'
-                ])
+                publishHTMLReport('.reports/phpmd', 'index.html', 'Mess Detector')
             }
         }
-        stage('Code stats') {
+        stage('Stats LOC') {
             steps {
                 sh 'sh .docker/scripts/phploc.sh'
-                publishHTML (target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: '.reports/phploc/',
-                    reportFiles: 'index.html',
-                    reportName: 'Code Stats (LOC)'
-                ])
+                publishHTMLReport('.reports/phploc', 'index.html', 'Stats LOC')
             }
         }
-//         stage('Churn') {
-//             steps {
-//                 sh 'sh .docker/scripts/churn.sh'
-//                 publishHTML (target: [
-//                     allowMissing: false,
-//                     alwaysLinkToLastBuild: false,
-//                     keepAll: true,
-//                     reportDir: '.reports/churn/',
-//                     reportFiles: 'index.html',
-//                     reportName: 'Churn'
-//                 ])
-//             }
-//         }
+        stage('Churn') {
+            steps {
+                sh 'sh .docker/scripts/churn.sh'
+                publishHTMLReport('.reports/churn', 'index.html', 'Churn')
+            }
+        }
         stage('PHPStan') {
             steps {
                 sh 'sh .docker/scripts/phpstan.sh'
-                publishHTML (target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: '.reports/phpstan/',
-                    reportFiles: 'index.html',
-                    reportName: 'PHPStan'
-                ])
+                publishHTMLReport('.reports/phpstan', 'index.html', 'PHPStan')
             }
         }
         stage('Psalm') {
             steps {
                 sh 'sh .docker/scripts/psalm.sh'
-                publishHTML (target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: '.reports/psalm/',
-                    reportFiles: 'index.html',
-                    reportName: 'Psalm'
-                ])
+                publishHTMLReport('.reports/psalm', 'index.html', 'Psalm')
             }
         }
         stage('PHPMetrics') {
             steps {
                 sh 'sh .docker/scripts/phpmetrics.sh'
-                publishHTML (target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: '.reports/phpmetrics/',
-                    reportFiles: 'index.html',
-                    reportName: 'PHPMetrics'
-                ])
+                publishHTMLReport('.reports/phpmetrics', 'index.html', 'PHPMetrics')
             }
         }
         stage('Magic Number Detector') {
             steps {
                 sh 'sh .docker/scripts/phpmnd.sh'
-                publishHTML (target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: '.reports/phpmnd/',
-                    reportFiles: 'index.html',
-                    reportName: 'PHP Magic Number Detector'
-                ])
+                publishHTMLReport('.reports/phpmnd', 'index.html', 'Magic Number Detector')x`
             }
         }
         stage('analyze') {
