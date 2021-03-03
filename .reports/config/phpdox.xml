@@ -16,13 +16,13 @@
                     <file name="../analyse/phploc.xml" />
                 </source>
                 <source type="checkstyle">
-                    <file name="../analysecheckstyle-result.xml" />
+                    <file name="../analyse/checkstyle-result.xml" />
                 </source>
                 <source type="phpcs">
-                    <file name="../analysecheckstyle-result.xml" />
+                    <file name="../analyse/checkstyle-result.xml" />
                 </source>
                 <source type="pmd">
-                    <file name="../analysepmd.xml" />
+                    <file name="../analyse/pmd.xml" />
                 </source>
                 <source type="phpunit">
                     <coverage path="." />
