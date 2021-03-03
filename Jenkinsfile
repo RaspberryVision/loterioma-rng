@@ -75,7 +75,7 @@ pipeline {
         stage('Magic Number Detector') {
             steps {
                 sh 'sh .docker/scripts/phpmnd.sh'
-                publishHTMLReport('.reports/phpmnd', 'index.html', 'Magic Number Detector')x`
+                publishHTMLReport('.reports/phpmnd', 'index.html', 'Magic Number Detector')
             }
         }
         stage('analyze') {
