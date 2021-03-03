@@ -142,6 +142,19 @@ pipeline {
                 ])
             }
         }
+        stage('PHP Magic Number Detector') {
+            steps {
+                sh 'sh .docker/scripts/phpmnd.sh'
+                publishHTML (target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: '.reports/phpmnd/',
+                    reportFiles: 'index.html',
+                    reportName: 'PHP Magic Number Detector'
+                ])
+            }
+        }
         stage('analyze') {
             steps {
                 sh 'mkdir -p .reports/analyse'
