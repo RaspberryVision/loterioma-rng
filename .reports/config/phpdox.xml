@@ -13,16 +13,16 @@
         <generator output="${basedir}/../phpdox">
             <enrich base="${basedir}/..">
                 <source type="phploc">
-                    <file name="../analyse/phploc.xml" />
+                    <file name="analyse/phploc.xml" />
                 </source>
                 <source type="checkstyle">
-                    <file name="./../analyse/checkstyle-result.xml" />
+                    <file name="/analyse/checkstyle-result.xml" />
                 </source>
                 <source type="phpcs">
-                    <file name="../analyse/checkstyle-result.xml" />
+                    <file name="analyse/checkstyle-result.xml" />
                 </source>
                 <source type="pmd">
-                    <file name="../../analyse/phpstan.xml" />
+                    <file name="analyse/phpstan.xml" />
                 </source>
                 <source type="phpunit">
                     <coverage path="." />
