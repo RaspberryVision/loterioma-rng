@@ -82,7 +82,7 @@ pipeline {
             steps {
                 sh 'mkdir -p .reports/analyse'
                 sh 'vendor/bin/phpcs -p --report=checkstyle --report-file=.reports/analyse/checkstyle-result.xml --standard=PSR2 src/ || exit 0'
-                sh 'vendor/bin/phpcpd --progress --log-pmd=.reports/analyse/cpd.xml src/ || exit 0'
+                sh 'vendor/bin/phpcpd --log-pmd=.reports/analyse/cpd.xml src/ || exit 0'
                 sh 'vendor/bin/pdepend --summary-xml=.reports/analyse/pdepend.xml --jdepend-chart=.reports/analyse/jdepend-chart.svg --overview-pyramid=.reports/analyse/jdepend-overview-pyramid.svg src/'
                 sh 'vendor/bin/phpmd src/ xml .reports/config/ruleset.xml --ignore-violations-on-exit --reportfile .reports/analyse/pmd.xml'
                 sh 'vendor/bin/phploc --log-xml=.reports/analyse/phploc.xml --log-csv=.reports/analyse/phploc.csv src/'
