@@ -91,6 +91,9 @@
     "j13k/yaml-lint": {
         "version": "1.1.x-dev"
     },
+    "jakub-onderka/php-console-color": {
+        "version": "v0.2"
+    },
     "jean85/pretty-package-versions": {
         "version": "1.5.1"
     },
@@ -151,6 +154,9 @@
     "php": {
         "version": "7.4"
     },
+    "php-parallel-lint/php-console-highlighter": {
+        "version": "v0.4"
+    },
     "phpbench/container": {
         "version": "1.2.1"
     },
@@ -195,6 +201,9 @@
     },
     "phpunit/php-timer": {
         "version": "5.0.3"
+    },
+    "povils/phpmnd": {
+        "version": "v2.4.0"
     },
     "psr/cache": {
         "version": "1.0.1"

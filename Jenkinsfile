@@ -125,7 +125,20 @@ pipeline {
                     keepAll: true,
                     reportDir: '.reports/psalm/',
                     reportFiles: 'index.html',
-                    reportName: 'PHPStan'
+                    reportName: 'Psalm'
+                ])
+            }
+        }
+        stage('PHPMetrics') {
+            steps {
+                sh 'sh .docker/scripts/phpmetrics.sh'
+                publishHTML (target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: '.reports/phpmetrics/',
+                    reportFiles: 'index.html',
+                    reportName: 'PHPMetrics'
                 ])
             }
         }
