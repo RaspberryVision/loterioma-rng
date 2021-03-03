@@ -15,14 +15,15 @@ pipeline {
         stage('Yaml linter') {
             steps {
                 sh 'sh .docker/scripts/yaml-lint.sh'
-                publishHTML (target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: '.reports/yaml-lint/',
-                    reportFiles: 'index.html',
-                    reportName: 'Yaml Lint'
-                ])
+                publishHTMLReport('.reports/yaml-lint', 'index.html', 'Yaml linter')
+//                 publishHTML (target: [
+//                     allowMissing: false,
+//                     alwaysLinkToLastBuild: false,
+//                     keepAll: true,
+//                     reportDir: '.reports/yaml-lint/',
+//                     reportFiles: 'index.html',
+//                     reportName: 'Yaml Lint'
+//                 ])
             }
         }
         stage('Code sniffer') {
@@ -142,7 +143,7 @@ pipeline {
                 ])
             }
         }
-        stage('PHP Magic Number Detector') {
+        stage('Magic Number Detector') {
             steps {
                 sh 'sh .docker/scripts/phpmnd.sh'
                 publishHTML (target: [
@@ -180,7 +181,7 @@ pipeline {
                 recordIssues enabledForFailure: true, tool: checkStyle(), qualityGates: [[threshold: 10, type: 'TOTAL', unstable: true]], healthy: 10, unhealthy: 100, minimumSeverity: 'HIGH'
                 recordIssues enabledForFailure: true, tool: cpd(), qualityGates: [[threshold: 10, type: 'TOTAL', unstable: true]], healthy: 10, unhealthy: 100, minimumSeverity: 'HIGH'
                 recordIssues enabledForFailure: true, tool: pmdParser(), qualityGates: [[threshold: 10, type: 'TOTAL', unstable: true]], healthy: 10, unhealthy: 100, minimumSeverity: 'HIGH'
-                recordIssues enabledForFailure: true, tool: phpStan(pattern: './reports/analyse/phpstan.xml'), qualityGates: [[threshold: 10, type: 'TOTAL', unstable: true]], healthy: 10, unhealthy: 100, minimumSeverity: 'HIGH'
+                recordIssues enabledForFailure: true, tool: phpStan(pattern: '.reports/analyse/phpstan.xml'), qualityGates: [[threshold: 10, type: 'TOTAL', unstable: true]], healthy: 10, unhealthy: 100, minimumSeverity: 'HIGH'
             }
         }
         stage('Documentation') {
@@ -196,12 +197,18 @@ pipeline {
                 ])
             }
         }
+    }
+}
 
-//         stage('Test') {
-//             steps {
-//                 echo 'Testing..'
-//                 sh 'php bin/phpunit --log-junit reports/phpunit.xml --coverage-clover reports/clover.xml --coverage-xml reports --coverage-html reports --coverage-crap4j reports/crap4j.xml --whitelist src/ tests'
-//             }
-//         }
+def publishHTMLReport(reportDir, file, reportName) {
+    if (fileExists("${reportDir}/${file}")) {
+        publishHTML(target: [
+            allowMissing         : true,
+            alwaysLinkToLastBuild: true,
+            keepAll              : true,
+            reportDir            : reportDir,
+            reportFiles          : file,
+            reportName           : reportName
+        ])
     }
 }
