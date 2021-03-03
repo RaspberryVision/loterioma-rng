@@ -137,7 +137,7 @@ pipeline {
                 sh 'vendor/bin/pdepend --summary-xml=.reports/analyse/pdepend.xml --jdepend-chart=.reports/analyse/jdepend-chart.svg --overview-pyramid=.reports/analyse/jdepend-overview-pyramid.svg src/'
                 sh 'vendor/bin/phpmd src/ xml .reports/config/ruleset.xml --ignore-violations-on-exit --reportfile .reports/analyse/pmd.xml'
                 sh 'vendor/bin/phploc --log-xml=.reports/analyse/phploc.xml --log-csv=.reports/analyse/phploc.csv src/'
-                sh 'vendor/bin/phpstan analyse --error-format=xml -l 8 src'
+                sh 'vendor/bin/phpstan analyse --error-format=xml -l 8 src > .reports/analyse/phpstan.xml || exit 0'
             }
         }
         stage('report') {
@@ -154,7 +154,7 @@ pipeline {
                 recordIssues enabledForFailure: true, tool: checkStyle(), qualityGates: [[threshold: 10, type: 'TOTAL', unstable: true]], healthy: 10, unhealthy: 100, minimumSeverity: 'HIGH'
                 recordIssues enabledForFailure: true, tool: cpd(), qualityGates: [[threshold: 10, type: 'TOTAL', unstable: true]], healthy: 10, unhealthy: 100, minimumSeverity: 'HIGH'
                 recordIssues enabledForFailure: true, tool: pmdParser(), qualityGates: [[threshold: 10, type: 'TOTAL', unstable: true]], healthy: 10, unhealthy: 100, minimumSeverity: 'HIGH'
-                recordIssues enabledForFailure: true, tool: phpStan(), qualityGates: [[threshold: 10, type: 'TOTAL', unstable: true]], healthy: 10, unhealthy: 100, minimumSeverity: 'HIGH', pattern:
+                recordIssues enabledForFailure: true, tool: phpStan(), qualityGates: [[threshold: 10, type: 'TOTAL', unstable: true]], healthy: 10, unhealthy: 100, minimumSeverity: 'HIGH'
             }
         }
         stage('Documentation') {
