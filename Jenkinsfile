@@ -157,12 +157,12 @@ pipeline {
         }
         stage('Documentation') {
             steps {
-                sh 'vendor/bin/phpdox -f reports/config/phpdox.xml'
+                sh 'vendor/bin/phpdox -f .reports/config/phpdox.xml'
                 publishHTML (target: [
                     allowMissing: false,
                     alwaysLinkToLastBuild: false,
                     keepAll: true,
-                    reportDir: 'reports/phpdox/html',
+                    reportDir: '.reports/phpdox/html',
                     reportFiles: 'index.html',
                     reportName:'PHPDox Documentation'
                 ])
