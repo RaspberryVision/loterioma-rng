@@ -137,7 +137,7 @@ pipeline {
                 sh 'vendor/bin/pdepend --summary-xml=.reports/analyse/pdepend.xml --jdepend-chart=.reports/analyse/jdepend-chart.svg --overview-pyramid=.reports/analyse/jdepend-overview-pyramid.svg src/'
                 sh 'vendor/bin/phpmd src/ xml .reports/config/ruleset.xml --ignore-violations-on-exit --reportfile .reports/analyse/pmd.xml'
                 sh 'vendor/bin/phploc --log-xml=.reports/analyse/phploc.xml --log-csv=.reports/analyse/phploc.csv src/'
-                sh 'vendor/bin/phpstan analyse --error-format=xml -l 8 src > .reports/analyse/phpstan.xml || exit 0'
+                sh 'vendor/bin/phpstan analyse --error-format=xml -l 8 src || exit 0'
             }
         }
         stage('report') {
