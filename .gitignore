@@ -28,5 +28,6 @@
 ###< squizlabs/php_codesniffer ###
 
 ###> reports ###
-.reports/yaml-lint
+.reports/
+!.reports/config
 ###< reports ###
